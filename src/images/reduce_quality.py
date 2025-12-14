@@ -11,10 +11,8 @@ def main(args):
     print_separator("PROCESSING IMAGES TO REDUCE QUALITY AND SIZE", sep_type="START")
     make_dirs(args.output_folder_path)
     list_files, n = list_dir_files(args.input_folder_path)
-    print(f"Total files to process: {n}")
+    print(f"- Total files to process: {n}")
     
-    
-
     for file_path in tqdm(list_files):
         process_image(file_path, args.output_folder_path)
 
@@ -22,18 +20,16 @@ def main(args):
 
 
 def process_image(file_path, output_folder_path):
-    # Get file name from path
     file_name = file_path.split('/')[-1]
     output_file_path = os.path.join(output_folder_path, file_name.split('.')[0] + '.png')
 
+    # Read RAW image and make it RGB: they are in raw format so the image is not 'standard'
     with rawpy.imread(file_path) as raw:
         rgb = raw.postprocess()
-
     img = Image.fromarray(rgb)
 
     # resize (example: max width 2000px, keep ratio)
     img.thumbnail((args.size, args.size), Image.LANCZOS)
-
     img.save(output_file_path, optimize=True)
 
 
