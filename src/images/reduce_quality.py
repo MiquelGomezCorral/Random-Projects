@@ -3,14 +3,22 @@ import argparse
 import rawpy
 from PIL import Image
 from tqdm import tqdm
+
 from maikol_utils.print_utils import print_separator
-from maikol_utils.file_utils import list_dir_files
+from maikol_utils.file_utils import list_dir_files, make_dirs
 
 def main(args):
-    list_files = list_dir_files(args.input_folder_path)
+    print_separator("PROCESSING IMAGES TO REDUCE QUALITY AND SIZE", sep_type="START")
+    make_dirs(args.output_folder_path)
+    list_files, n = list_dir_files(args.input_folder_path)
+    print(f"Total files to process: {n}")
+    
+    
 
     for file_path in tqdm(list_files):
         process_image(file_path, args.output_folder_path)
+
+    print_separator("DONE!", sep_type="START")
 
 
 def process_image(file_path, output_folder_path):
@@ -30,7 +38,7 @@ def process_image(file_path, output_folder_path):
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(prog="reduce_quality", description="Main Application CLI")
+    parser = argparse.ArgumentParser(prog="reduce_quality", description="Main Application CLI. Example of usage: python ./src/images/reduce_quality.py -i /mnt/c/Users/mique/Desktop/SyncMaikol/.Importantes/.Fotos/Fotos/Poland/all -o /mnt/c/Users/mique/Desktop/SyncMaikol/.Importantes/.Fotos/Fotos/Poland/all_reduced/ ")
 
     parser.add_argument(
         "-i", "--input_folder_path", type=str, required=True, help="Path to the input folder"
