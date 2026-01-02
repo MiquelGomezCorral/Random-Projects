@@ -9,12 +9,8 @@ from datetime import datetime
 from maikol_utils.file_utils import list_dir_files
 from maikol_utils.print_utils import print_separator
 
-try:
-    from PIL import Image
-    from PIL.ExifTags import TAGS
-    PILLOW_AVAILABLE = True
-except ImportError:
-    PILLOW_AVAILABLE = False
+from PIL import Image
+from PIL.ExifTags import TAGS
 
 def main(args: argparse.Namespace):
     """Main function to move photos based on date.
@@ -40,7 +36,6 @@ def main(args: argparse.Namespace):
     files, _ = list_dir_files(input_folder, recursive=recursive, absolute_path=True)
 
     for f in tqdm(files):
-        print(f"Processing file: {f}")
         time = creation_date(f)
         file_name = os.path.basename(f)
         output_path = os.path.join(output_folder, file_name)
@@ -66,9 +61,6 @@ def main(args: argparse.Namespace):
 
 def get_exif_date(path_to_file):
     """Extract creation date from EXIF data if available."""
-    if not PILLOW_AVAILABLE:
-        return None
-    
     try:
         image = Image.open(path_to_file)
         exif_data = image._getexif()
