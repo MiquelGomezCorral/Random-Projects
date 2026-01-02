@@ -9,9 +9,6 @@ from datetime import datetime
 from maikol_utils.file_utils import list_dir_files
 from maikol_utils.print_utils import print_separator
 
-from PIL import Image
-from PIL.ExifTags import TAGS
-
 def main(args: argparse.Namespace):
     """Main function to move photos based on date.
 
@@ -57,50 +54,14 @@ def main(args: argparse.Namespace):
             shutil.copy2(f, output_path)
 
 
-
-
-def get_exif_date(path_to_file):
-    """Extract creation date from EXIF data if available."""
-    try:
-        image = Image.open(path_to_file)
-        exif_data = image._getexif()
-        if exif_data is None:
-            return None
-        
-        # Look for DateTimeOriginal (when photo was taken)
-        for tag_id, value in exif_data.items():
-            tag_name = TAGS.get(tag_id, tag_id)
-            if tag_name == 'DateTimeOriginal':
-                # Parse EXIF date format: "YYYY:MM:DD HH:MM:SS"
-                dt = datetime.strptime(value, '%Y:%m:%d %H:%M:%S')
-                return dt.timestamp()
-        return None
-    except Exception:
-        return None
-
-
 def creation_date(path_to_file):
     """
-    Try to get the Unix timestamp that a file was created.
-    For photos, tries EXIF data first, then falls back to file system metadata.
+    Get the Unix timestamp that a file was last modified.
     """
-    # Try EXIF data for image files
-    exif_time = get_exif_date(path_to_file)
-    if exif_time is not None:
-        return exif_time
-    
-    # Try birthtime on systems that support it (macOS, Windows)
     if platform.system() == 'Windows':
         return os.path.getctime(path_to_file)
     
-    stat = os.stat(path_to_file)
-    try:
-        # macOS/BSD have st_birthtime
-        return stat.st_birthtime
-    except AttributeError:
-        # Linux doesn't reliably support birth time
-        # Fall back to modification time
-        return os.path.getmtime(path_to_file)
+    return os.path.getmtime(path_to_file)
 
 
 # ======================================================================================
