@@ -5,6 +5,9 @@ Random small projects and code I create
 # Create env
 
 ```bash
+conda create --name GLOBAL_env python=3.13 -y
+conda activate GLOBAL_env
+# OR
 python3.12 -m venv venv
 source venv/bin/activate
 
@@ -18,6 +21,8 @@ python -m ipykernel install --user --name=venv --display-name "Python (venv)"
 
 # Reduce image size
 ```bash
+conda activate GLOBAL_env
+# OR
 source venv/bin/activate
 
 python ./src/images/reduce_quality.py -i /mnt/c/Users/mique/Desktop/SyncMaikol/.Importantes/.Fotos/Fotos/Poland/all -o /mnt/c/Users/mique/Desktop/SyncMaikol/.Importantes/.Fotos/Fotos/Poland/all_reduced/
@@ -35,6 +40,8 @@ Copy the photos from any device / folder to somewhere else. Use it for backups o
 > -d limit date: will only copy file from this date forwards
 
 ```bash
+conda activate GLOBAL_env
+# OR
 source venv/bin/activate
 
 python src/files/copy_photos_date.py -i "/run/user/1000/gvfs/mtp:host=Xiaomi_POCO_X4_Pro_5G_81290626fe9f/Almacenamiento interno compartido/DCIM/Camera" -o "/media/turbotowerlnx/TOSHIBA EXT/Miquel/Fotos 2025-09-14 -- 2026-01-02/Fotos" -d "2025-09-15" -fn .mp4 .trashed
