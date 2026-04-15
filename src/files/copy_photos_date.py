@@ -7,7 +7,7 @@ import platform
 from tqdm import tqdm
 from datetime import datetime
 from maikol_utils.file_utils import list_dir_files
-from maikol_utils.print_utils import print_separator
+from maikol_utils.print_utils import print_separator, print_color
 
 def main(args: argparse.Namespace):
     """Main function to move photos based on date.
@@ -15,6 +15,9 @@ def main(args: argparse.Namespace):
     Args:
         args (argparse.Namespace): Command line arguments.
     """
+    # ======================================================================
+    #                           MAIN FUNCTION
+    # ======================================================================
     print_separator("MOVE PHOTOS BASED ON DATE", sep_type="START")
     input_folder = args.input_folder
     output_folder = args.output_folder
@@ -28,10 +31,24 @@ def main(args: argparse.Namespace):
     print(f" - Recursive:     {recursive}")
     print(f" - Limit date:    {limit_date}")
 
+    # ======================================================================
+    #                           LIST FILES
+    # ======================================================================
+    print_separator("LISTING FILES", sep_type="LONG")
+
+    print(f" - Looking for files in input folder...")
+    files, n = list_dir_files(input_folder, recursive=recursive, absolute_path=True)
+    print(f" - Found {n} files in input folder.")
+
+    # ======================================================================
+    #                           PROCESS FILES
+    # ======================================================================
     print_separator("PROCESSING FILES", sep_type="LONG")
 
-    files, _ = list_dir_files(input_folder, recursive=recursive, absolute_path=True)
-
+    error_count = 0
+    negative_filter_count = 0
+    positive_filter_count = 0
+    accepted_count = 0
     for f in tqdm(files):
         time = creation_date(f)
         file_name = os.path.basename(f)
@@ -39,19 +56,36 @@ def main(args: argparse.Namespace):
 
         if time is None:
             print(f"Could not determine creation date for file: {f}")
+            error_count += 1
             continue
 
         if filter_negative:
             if any(fn in file_name for fn in filter_negative):
                 # print(f"Skipping file due to negative filter: {f}")
+                negative_filter_count += 1
                 continue
         if filter_positive:
             if not any(fp in file_name for fp in filter_positive):
                 # print(f"Skipping file due to positive filter: {f}")
+                positive_filter_count += 1
                 continue
         
         if datetime.fromtimestamp(time).date() > limit_date:
             shutil.copy2(f, output_path)
+            accepted_count += 1
+
+    # ======================================================================
+    #                               SUMMARY
+    # ======================================================================
+    print_separator("SUMMARY", sep_type="LONG")
+   
+    print_color(f" - Total files found: {n}", color="cyan")
+    print_color(f" - Accepted: {accepted_count}", color="green")
+    print_color(f" - Skipped due to negative filter: {negative_filter_count}", color="yellow")
+    print_color(f" - Skipped due to positive filter: {positive_filter_count}", color="yellow")
+    print_color(f" - Errors: {error_count}", color="red")
+
+    print_separator("MOVE PHOTOS BASED ON DATE", sep_type="START")
 
 
 def creation_date(path_to_file):
