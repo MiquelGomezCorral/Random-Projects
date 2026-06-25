@@ -1,7 +1,7 @@
 title:
   en: Random Projects & Utility Scripts
   es: Proyectos Varios y Scripts de Utilidad
-finished: finished
+finished: progress
 descriptionShort:
   en: "Collection of small utility scripts: photo quality reducer, smart backup copier (recursive, date-filtered), and other misc tools. Built with Python for personal automation tasks."
   es: "Colección de pequeños scripts de utilidad: reductor de calidad de fotos, copiador de backups inteligente (recursivo, filtrado por fecha), y otras herramientas varias. Construido con Python para tareas de automatización personal."
