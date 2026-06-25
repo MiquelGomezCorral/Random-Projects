@@ -12,10 +12,14 @@ descriptionLong:
     Un cajón de sastre de pequeños scripts Python prácticos para automatización personal y gestión de archivos. Incluye: un reductor de calidad de imágenes que procesa fotos en lote para ahorrar espacio, un copiador de backups inteligente que copia recursivamente archivos desde dispositivos a discos de respaldo con filtrado por fecha (solo copia archivos desde una fecha dada en adelante) y exclusión por patrón de archivo, y otras herramientas varias acumuladas con el tiempo. Sirve como kit de herramientas personal para operaciones comunes de archivos.
 technologies: [python]
 tags: [other]
+date:
+  en: Jun 2025
+  es: Jun 2025
 keywords:
   en: [photo backup, image reducer, file copier, date filter, recursive copy, automation scripts, personal tools, photo management, batch processing, utility scripts]
   es: [copia de seguridad de fotos, reductor de imágenes, copiador de archivos, filtro por fecha, copia recursiva, scripts de automatización, herramientas personales, gestión de fotos, procesamiento por lotes, scripts de utilidad]
 slug: Random-Projects
 order: 5
 featured: false
+
 
