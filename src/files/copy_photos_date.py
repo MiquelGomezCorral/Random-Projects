@@ -6,7 +6,7 @@ import os
 import platform
 from tqdm import tqdm
 from datetime import datetime
-from maikol_utils.file_utils import list_dir_files
+from maikol_utils.file_utils import list_dir_files, make_dirs
 from maikol_utils.print_utils import print_separator, print_color
 
 def main(args: argparse.Namespace):
@@ -39,6 +39,8 @@ def main(args: argparse.Namespace):
     print(f" - Looking for files in input folder...")
     files, n = list_dir_files(input_folder, recursive=recursive, absolute_path=True)
     print(f" - Found {n} files in input folder.")
+
+    make_dirs(output_folder)
 
     # ======================================================================
     #                           PROCESS FILES
