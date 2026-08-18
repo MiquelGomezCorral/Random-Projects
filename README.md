@@ -44,7 +44,12 @@ conda activate GLOBAL_env
 # OR
 source venv/bin/activate
 
-python src/files/copy_photos_date.py -i "/run/user/1000/gvfs/mtp:host=Xiaomi_POCO_X4_Pro_5G_81290626fe9f/Almacenamiento interno compartido/DCIM/Camera" -o "/media/turbotowerlnx/TOSHIBA EXT/Miquel/Fotos 2026-01-02 -- 2026-04-15/Fotos" -d "2026-01-02" -fn .mp4 .trashed
+python src/files/copy_photos_date.py -i "/run/user/1000/gvfs/mtp:host=Xiaomi_POCO_X4_Pro_5G_81290626fe9f/Almacenamiento interno compartido/DCIM/Camera" -o "/media/turbotowerlnx/TOSHIBA EXT/Miquel/Fotos 2026-04-15 -- 2026-08-18/Fotos" -d "2026-04-15" -fn .mp4 .trashed
 
-python src/files/copy_photos_date.py -i "/run/user/1000/gvfs/mtp:host=Xiaomi_POCO_X4_Pro_5G_81290626fe9f/Almacenamiento interno compartido/DCIM" -o "/media/turbotowerlnx/TOSHIBA EXT/Miquel/Fotos 2026-01-02 -- 2026-04-15/Videos" -d "2026-01-02" -fp .mp4 -fn .trashed
+python src/files/copy_photos_date.py -i "/run/user/1000/gvfs/mtp:host=Xiaomi_POCO_X4_Pro_5G_81290626fe9f/Almacenamiento interno compartido/DCIM/Screenshots" -o "/media/turbotowerlnx/TOSHIBA EXT/Miquel/Fotos 2026-04-15 -- 2026-08-18/Fotos" -d "2026-04-15" -fn .mp4 .trashed
+
+python src/files/copy_photos_date.py -i "/run/user/1000/gvfs/mtp:host=Xiaomi_POCO_X4_Pro_5G_81290626fe9f/Almacenamiento interno compartido/DCIM/Imaging Edge Mobile" -o "/media/turbotowerlnx/TOSHIBA EXT/Miquel/Fotos 2026-04-15 -- 2026-08-18/Fotos" -d "2026-04-15" -fn .mp4 .trashed
+
+
+python src/files/copy_photos_date.py -i "/run/user/1000/gvfs/mtp:host=Xiaomi_POCO_X4_Pro_5G_81290626fe9f/Almacenamiento interno compartido/DCIM" -o "/media/turbotowerlnx/TOSHIBA EXT/Miquel/Fotos 2026-04-15 -- 2026-08-18/Videos" -d "2026-04-15" -fp .mp4 -fn .trashed
 ```
